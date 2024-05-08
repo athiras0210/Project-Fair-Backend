@@ -1,0 +1,75 @@
+Backend for PROJECT FAIR
+                        ---------------------------------
+
+    1. Create a folder for backend - project-fair-backend
+    2. Create package.json file - npm init -y
+    3. Install 3rd party packages
+
+    Express - npm i express
+    ->Express.js is the most popular backend framework for Node.js, and it is an extensive part of the JavaScript ecosystem.
+    ->It is designed to build single-page, multi-page, and hybrid web applications
+    -> it has also become the standard for developing backend applications with Node.js, and it is the backend part of something known as the MERN stack.
+
+    ->The MERN is a free and open-source JavaScript software stack for building dynamic websites and web applications that has the following components:
+
+    ->MongoDB: MongoDB is the standard NoSQL database
+    ->Express.js: The default web applications framework for building web apps
+    ->React.js: The JavaScript framework used for building front-end web applications
+    ->Node.js: JavaScript engine used for scalable server-side and networking applications.
+
+    CORS - npm i cors 
+    ->The word CORS stands for “Cross-Origin Resource Sharing”. Cross-Origin Resource Sharing is an HTTP-header based mechanism implemented by the browser which allows a server or an API(Application Programming Interface) to indicate any origins (different in terms of protocol, hostname, or port) other than its origin from which the unknown origin gets permission to access and load resources. The cors package available in the npm registry is used to tackle CORS errors in a Node.js application.
+
+    Environment variables are variables external to our application which reside in the OS or the container of the app is running in. An environment variable is simply a name mapped to a value.
+    Data which changes depending on the environment your app is running on should be set as environment variables. Some common examples are:
+
+    -HTTP Port and Address
+    -Database, cache, and other storage connection information
+    -Location of static files/folders
+
+    The dotenv Library
+    This library does one simple task: loads environment variables from a .env file into the process.env variable in Node.jsThe dotenv Library
+
+
+
+
+    mongodb+srv://athiras:<password>@cluster0.p3dfgja.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+    setup mongodb atlas -> create database 
+
+    project-fair-backend
+        -> npm init -y (create package.json)
+        -> npm i express cors dotenv (third party installation)
+        -> package.json "start": "nodemon index.js" (remove test and add this line)
+        -> create index.js file
+
+
+    //1. Loads .env file contents into process.env by default.
+    //If DOTENV_KEY is present, it smartly attempts to load encrypted .env.vault file contents into process.env.
+    require("dotenv").config();
+
+    //2. Import express
+    const express = require("express");
+
+    //3.Import cors
+    const cors = require("cors");
+
+    //4. Create an application using express
+    const pfServer = express();
+
+    //5. Use express and cors
+    pfServer.use(cors());
+    pfServer.use(express.json());
+    //Returns middleware that only parses json and only looks at requests where the Content-Type header matches the type option.
+
+    //6. Port creation
+    const PORT = 4000 || process.env.PORT;
+
+    pfServer.listen(PORT, () => {
+         console.log("pfServer listening on port " + PORT);
+    });
+
+    pfServer.get("/", (req, res) => {
+         res.send("Welcome to Project-fair");
+    });
+
